@@ -22,105 +22,296 @@
     <div class="container">
       <!-- <div class="header__logo"><img src="assets/images/logo.svg" alt="チームロゴ"></div> -->
       <div class="header__logo">神戸キャンパス Iチーム</div>
-      <div class="header__name"> N・S高生制作サイト</div>
+      <div class="header__name">N・S高生制作サイト</div>
     </div>
   </header>
-  <main class="main index-page">
+  <main class="main main-page">
     <!-- タイトルエリア　ここから -->
-    <h1 class="main-title"><img src="assets/images/タイトル.png" alt="Presented by SCRAP×N・S高リアル脱出ゲーム制作PJ 封鎖された家庭科室からの脱出"></h1>
+    <h1 class="main-title"><img src="assets/images/ミニタイトル.png" alt="封鎖された家庭科室からの脱出"></h1>
     <!-- タイトルエリア　ここまで -->
-    <section class="section section--story">
-      <div class="container">
-        <h2 class="section-title section-title--keycolor section-title--story">ストーリー</h2>
-        <div class="story">
-          <p class="text-center">2025年。<br>
-            大人気RPGゲーム「吉野ﾁｬﾝ伝説」では、今日もたくさんのプレイヤーが集まりダンジョンを回っている。<br>
-            そんな平和なゲームのサーバーが突如何者かによってハッキングされてしまった。<br>
-            どうやらサーバーのロックを解除するためには、犯人が用意したダンジョンをクリアしなければならないようだ。
-          <div class="story__note__outer bg-color--gray">
-            <ul class="story__note">
-              <li>30分を超えるとゲームが元に戻らなくなってしまう</li>
-            </ul>
+    <div id="stage">
+
+      <!-- STAGE1　ここから -->
+      <div id="sectionStage1" class="stage">
+
+        <!-- STAGE1問題セクション　ここから -->
+        <section class="section">
+          <div class="container">
+            <h2 class="section-title section-title--keycolorlight"><span class="section-title__stage">STAGE：1</span>鍵を見つけ出せ！</h2>
+            <p class="text-center">まずは、ダンジョンの鍵を探そう。<br>
+              下の画像の謎を解き、鍵のありかをキーワード欄に入力しよう。</p>
+            <p class="text-center">困ったときは、ヒントがある。なるべく見ないようにゲームを進めていこう。</p>
+  
+            <div class="container">
+              <figure class="image__container">
+                <img src="assets/images/1問目.png" alt="">
+              </figure>
+                
+ <!--  YouTube貼り付け
+              <div class="youtube__container">
+                <div class="youtube">
+                  <iframe width="560" height="315" src="https://www.youtube.com/embed/IRyJe-0Uie0?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+              </div>
+Youtube貼り付けここまで -->
+                
+            </div>
           </div>
-          <p class="text-center">まずは、ダンジョンに入るための鍵を探さないといけない、、<br>
-            さっそく犯人から謎が送られてきた！</p>
-        </div>
+        </section>
+        <!-- STAGE1問題セクション　ここまで -->
+
+        <!-- STAGE1解答入力セクション　ここから -->
+        <section class="section bg-color--keycolor">
+          <div class="container">
+            <h2 class="section-title"><span class="section-title__stage">STAGE：1</span>アルファベットで入力してね！</h2>
+            <!------------------------------------------------------------------------------------------------------------
+              解答入力欄のコンポーネントです。入力欄・送信ボタン・エラーメッセージを表示します。
+              v-bind:correct="correctAnswer['stage1']['q1']" は正解の解答を指します。
+              v-on:answer-input="
+              ($event, 'stage1', 1)" は送信ボタンをクリックした時の動作を決める関数です。
+              2番目、3番目の1引数 'stage1', 1 はstage1の1問目ということになります。
+              1番麺の引数 $event は正解、不正解の判定を受け取る変数です。
+              []、()の間違い、''の抜けがあると動きません。
+            ------------------------------------------------------------------------------------------------------------>
+            <answer-input v-bind:correct="correctAnswer['stage1']['q1']" v-on:answer-input="answerInput($event, 'stage1', 1)"></answer-input>
+
+            <a class="link-hint" href="hint1.html" target="hint1">ヒントをみる ></a>
+          </div>
+        </section>
+        <!-- STAGE1解答入力セクション　ここまで -->
+
+        <!-- STAGE1クリア画面　ここから -->
+        <!------------------------------------------------------------------------------------------------------
+          ステージを全問正解するとclear['stage1']がtrusになります。
+          v-if="clear['stage1']"はclear['stage1']がtrueになったら表示します。
+          v-bind:class="{isClear:clear['stage1']}"はclear['stage1']がtrueになったら「isClear」クラスを追加します。
+        -------------------------------------------------------------------------------------------------------->
+        <section v-if="clear['stage1']" v-bind:class="{isClear:clear['stage1']}"  class="section section--clear bg-color--gray">
+          <div class="container">
+            <div class="clear-message">
+              <div class="clear-message__title">STAGE：１  クリア！</div>
+              <div class="clear-message__content">鍵がある街がわかった！<br>
+                ダンジョンをクリアするために謎を解いていこう！</div>
+              <button v-on:click="nextStage('stage1')" onclick="location.href='#sectionStage2'" class="clear-message__btn btn">次のステージへ<svg class="btn__arrow"><use xlink:href="#arrow"></use></svg></button>
+            </div>
+          </div>
+        </section>
+        <!-- STAGE1クリア画面　ここまで -->
+
       </div>
-    </section>
-    <section class="section bg-color--gray">
-      <div class="container">
-        <h2 class="section-title">ゲーム開始前の準備</h2>
-        <p class="font-eng text-center">Are you ready for game?</p>
-        <!--
-          class名"row"内のclass名"column"が横並びになります。
-          改行する場合は以下のように追加してください。
-          <div class="row">
-            <div class="column">
-              ～ 内容 ～
+      <!-- STAGE1　ここまで -->
+
+      <!-- STAGE2　ここから -->
+      <!---------------------------------------------------------------------
+        クリア画面の「次のステージへ」ボタンをクリックしたら表示します。
+        v-if="next['stage1']"はnext['stage1']がtrueになったら表示します。
+      ----------------------------------------------------------------------->
+      <div v-if="next['stage1']" id="sectionStage2" class="stage">
+        <section>
+          <div class="section">
+            <div class="container">
+              <h2 class="section-title section-title--keycolorlight"><span class="section-title__stage">STAGE：2</span>部屋のパスワードを解け！</h2>
+              <p class="text-center">街を探索し、鍵がある部屋を見つけた！<br>
+                しかし、扉はロックされており、謎を解かないと開かないようだ、、、<br>
+                ロックを解除し、鍵を入手しよう！</p>
             </div>
           </div>
-        -->
-        <div class="row">
-          <div class="column">
-            <div class="card">
-              <h3 class="card__title">遊ぶ日時を決めよう！</h3>
-              <p class="card__content">前後の説明、解説をあわせ、想定所要時間は100分〜120分です。途中で中断することもできますが、お時間に余裕があるときにご参加ください。</p>
+          <div class="stage-column__container section bg-color--keycolor">
+            <div class="container">
+              
+              <!-------------------------------------------------------------
+                class名"row"内のclass名"column"が横並びになります。
+                改行する場合は以下のように追加してください。
+                <div class="row">
+                  <div class="column">
+                    ～ 内容 ～
+                  </div>
+                </div>
+              ------------------------------------------------------------->
+              <div class="row">
+
+                <!-- STAGE2-1　ここから -->
+                <div class="column">
+                  <!-- STAGE2-1問題セクション　ここから -->
+                  <figure class="image__container">
+                    <img src="assets/images/2問目.png" alt="">
+                  </figure>
+                  <h2 class="section-title"><span class="section-title__stage">STAGE：2</span>ひらがなで入力してね！</h2>
+                  <!-- STAGE2-1問題セクション　ここまで -->
+                  <!-- STAGE2-1解答入力セクション　ここから -->
+                  <answer-input v-bind:correct="correctAnswer['stage2']['q1']" v-on:answer-input="answerInput($event, 'stage2', 1)"></answer-input>
+                  <a class="link-hint" href="hint2.html" target="hint2">ヒントをみる ></a>
+                  <!-- STAGE2-1解答入力セクション　ここまで -->
+                </div><!-- /.column -->
+                <!-- STAGE2-1　ここまで -->
+
+              </div><!-- /.row -->
+
             </div>
           </div>
-          <div class="column">
-            <div class="card">
-              <h3 class="card__title">紙とペンを用意しよう！</h3>
-              <p class="card__content">メモをとるための紙と筆記用具をお手元にご準備ください。</p>
+        </section>
+
+        <!-- STAGE2クリア画面　ここから -->
+        <section v-if="clear['stage2']" v-bind:class="{isClear:clear['stage2']}"  class="section section--clear bg-color--gray">
+          <div class="container">
+            <div class="clear-message">
+              <div class="clear-message__title">STAGE：2　クリア！</div>
+              <div class="clear-message__content">鍵をゲット！<br>
+                早速ダンジョンに挑戦だ！</div>
+                <button v-on:click="nextStage('stage2')" onclick="location.href='#sectionStage3'" class="clear-message__btn btn">次のステージへ<svg class="btn__arrow"><use xlink:href="#arrow"></use></svg></button>
             </div>
           </div>
-          <div class="column">
-            <div class="card">
-              <h3 class="card__title">ブラウザのCookieとキャッシュを<br>削除しよう！</h3>
-              <p class="card__content">エラーが起きる原因となる恐れがありますので、必ずCookieとキャッシュを削除してからプレイを開始するようにしてください。</p>
-            </div>
-          </div>
-        </div>
+        </section>
+        <!-- STAGE2クリア画面　ここまで -->
       </div>
-    </section>
-    <section class="section bg-color--keycolor">
-      <div class="container">
-        <h2 class="section-title">複数人での遊び方</h2>
-        <p class="font-eng text-center">Playing games with multiple players</p>
-        <div class="row">
-          <div class="column">
-            <div class="card">
-              <h3 class="card__title">コミュニケーションツールを用意！</h3>
-              <p class="card__content">例：Zoom、LINE通話など<br>
-                カメラはオフにしたままでも参加は可能です。<br>
-                ただ、離れたところにいる仲間と同じ会場で謎解きをしている気持ちになれるので、カメラをオンにしてみんなでわいわいプレイをすることをお勧めします。</p>
+      <!-- STAGE2　ここまで -->
+
+      <!-- STAGE3　ここから-->
+      <div v-if="next['stage2']" id="sectionStage3" class="stage">
+        <section>
+          <div class="section">
+            <div class="container">
+              <h2 class="section-title section-title--keycolorlight"><span class="section-title__stage">STAGE：3</span>武器を手に入れろ！</h2>
+              <p class="text-center">2階のボスの部屋に行くためには1階の敵を倒さなければいけないようだ。<br>
+                宝箱のロックを解除して武器を手に入れよう！</p>
             </div>
           </div>
-          <!-- <div class="column">
-            <div class="card">
-            </div>
-          </div> -->
-          <div class="column">
-            <div class="card">
-              <h3 class="card__title">情報共有はしっかりと！</h3>
-              <p class="card__content">遠くにいる仲間と足並みを揃えて遊びましょう。<br>
-                解けた謎の答えや思いついたことはなんでも共有しましょう！</p>
+          <div class="stage-column__container section bg-color--keycolor">
+            <div class="container">
+
+              <div class="row">
+
+                <!-- STAGE3-1　ここから -->
+                <div class="column">
+                  <!-- STAGE3-1問題セクション　ここから -->
+                  <figure class="image__container">
+                    <img src="assets/images/3問目.png" alt="">
+                  </figure>
+                  <h2 class="section-title"><span class="section-title__stage">STAGE：3</span>ひらがなで入力してね！</h2>
+                  <!-- STAGE3-1問題セクション　ここまで -->
+                  <!-- STAGE3-1解答入力セクション　ここから -->
+                  <answer-input v-bind:correct="correctAnswer['stage3']['q1']" v-on:answer-input="answerInput($event, 'stage3', 1)"></answer-input>
+                  <a class="link-hint" href="hint3.html" target="hint3">ヒントをみる ></a>
+                  <!-- STAGE3-1解答入力セクション　ここまで -->
+                </div><!-- /.column -->
+                <!-- STAGE3-1　ここまで -->
+
+              </div><!-- /.row -->
+
             </div>
           </div>
-        </div>
+        </section>
+
+        <!-- STAGE3クリア画面　ここから -->
+        <section v-if="clear['stage3']" v-bind:class="{isClear:clear['stage3']}"  class="section section--clear bg-color--gray">
+          <div class="container">
+            <div class="clear-message">
+              <div class="clear-message__title">STAGE：3　クリア！</div>
+              <div class="clear-message__content">武器をゲット！<br>
+                無事敵を倒すことができた！</div>
+                <button v-on:click="nextStage('stage3')" onclick="location.href='#sectionStage4'" class="clear-message__btn btn">次のステージへ<svg class="btn__arrow"><use xlink:href="#arrow"></use></svg></button>
+            </div>
+          </div>
+        </section>
+        <!-- STAGE3クリア画面　ここまで -->
       </div>
-    </section>
-    <section class="section">
-      <div class="container">
-        <a class="btn" href="main.html">準備OK？では、ゲームスタート！！！<svg class="btn__arrow"><use xlink:href="#arrow"></use></svg></a>
+      <!-- STAGE3　ここまで -->
+
+      <!-- STAGE4　ここから-->
+      <div v-if="next['stage3']" id="sectionStage3" class="stage">
+        <section>
+          <div class="section">
+            <div class="container">
+              <h2 class="section-title section-title--keycolorlight"><span class="section-title__stage">STAGE：4</span>ボスを倒せ！</h2>
+              <p class="text-center">ボス部屋へ来たはいいが、ボスの弱点がわからずなかなか倒せない...<br>
+                謎を解くとボスの弱点を叩き出すことが出来るようだ。</p>
+            </div>
+          </div>
+          <div class="stage-column__container section bg-color--keycolor">
+            <div class="container">
+
+              <div class="row">
+
+                <!-- STAGE4　ここから -->
+                <div class="column">
+                  <!-- STAGE4問題セクション　ここから -->
+                  <figure class="image__container">
+                    <img src="assets/images/4問目.png" alt="">
+                  </figure>
+                  <h2 class="section-title"><span class="section-title__stage">STAGE：4</span>ひらがなで入力してね！</h2>
+                  <!-- STAGE4問題セクション　ここまで -->
+                  <!-- STAGE4解答入力セクション　ここから -->
+                  <answer-input v-bind:correct="correctAnswer['stage4']['q1']" v-on:answer-input="answerInput($event, 'stage4', 1)"></answer-input>
+                  <a class="link-hint" href="hint4.html" target="hint4">ヒントをみる ></a>
+                  <!-- STAGE4解答入力セクション　ここまで -->
+                </div><!-- /.column -->
+                <!-- STAGE3-1　ここまで -->
+
+              </div><!-- /.row -->
+
+            </div>
+          </div>
+        </section>
+
+        <!-- STAGE4クリア画面　ここから -->
+        <section v-if="clear['stage4']" v-bind:class="{isClear:clear['stage4']}"  class="section section--clear bg-color--gray">
+          <div class="container">
+            <div class="clear-message">
+              <div class="clear-message__title">STAGE：4　クリア！</div>
+              <div class="clear-message__content">ボスを倒した！<br>
+                ダンジョンクリアだ！</div>
+                <button v-on:click="nextStage('stage4')" onclick="location.href='#sectionStage5'" class="clear-message__btn btn">次のステージへ<svg class="btn__arrow"><use xlink:href="#arrow"></use></svg></button>
+            </div>
+          </div>
+        </section>
+        <!-- STAGE4クリア画面　ここまで -->
       </div>
-    </section>
+      <!-- STAGE4　ここまで -->      
+
+      <!-- STAGE5　ここから -->
+      <div v-if="next['stage4']" id="sectionStage5" class="stage">
+
+        <!-- STAGE3-1問題セクション　ここから -->
+        <section class="section">
+          <div class="container">
+            <h2 class="section-title section-title--keycolorlight"><span class="section-title__stage">STAGE：5</span>犯人を倒せ！</h2>
+            <p class="text-center">まさかクリアできると思っておらず焦った犯人は、最後の勝負を挑んできた！<br>
+              謎を解くと、犯人の個人情報がわかるみたい！<br>
+            <figure class="image__container">
+              <img src="assets/images/5問目.png" alt="">
+            </figure>
+          </div>
+        </section>
+        <!-- STAGE3-1問題セクション　ここまで -->
+
+        <!-- STAGE3-1解答入力セクションここから -->
+        <section class="section bg-color--keycolor">
+          <div class="container">
+            <h2 class="section-title"><span class="section-title__stage">STAGE：5</span>数字で入力してね！</h2>
+            <answer-input v-bind:correct="correctAnswer['stage5']['q1']" v-on:answer-input="answerInput($event, 'stage5', 1, 'final')"></answer-input>
+            <a class="link-hint" href="hint5.html" target="hint5">ヒントをみる ></a>
+          </div>
+        </section>
+        <!-- STAGE3-1解答入力セクション　ここまで -->
+
+              </div><!-- /.row -->
+
+            </div>
+          </div>
+        </section>
+      </div>
+
+
+    </div>
   </main>
   <footer class="footer section bg-color--gray">
     <div class="container">
-      <p class="text-center">授業主催： N・S高<br>協力：株式会社SCRAP<br>企画制作：N・S高生</p>
-      <p class="text-center">「リアル脱出ゲーム」は株式会社SCRAPの登録商標です。</p>
-      <p class="text-center">株式会社SCRAPとN・S高で実施した授業「リアル脱出ゲームの作り方」の一環で<br>生徒が制作したものであり、SCRAPが主催/公認するものではありません。</p>
+        <p class="text-center">授業主催： N・S高<br>協力：株式会社SCRAP<br>企画制作：N・S高生</p>
+        <p class="text-center">「リアル脱出ゲーム」は株式会社SCRAPの登録商標です。</p>
+        <p class="text-center">株式会社SCRAPとN・S高で実施した授業「リアル脱出ゲームの作り方」の一環で<br>生徒が制作したものであり、SCRAPが主催/公認するものではありません。</p>
     </div>
   </footer>
+  <script src="https://unpkg.com/vue@next"></script>
+  <script src="assets/js/main.js"></script>
 </body>
 </html>
